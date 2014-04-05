@@ -14,3 +14,4 @@ $conf = array(
     'version' => '2.4',
     'enviroment' => 'DEVELOPMENT', // 'PRODUCTION'
 );
+return $conf;
