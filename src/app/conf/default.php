@@ -6,16 +6,12 @@ $conf = array(
         'dir'=>'c:\\temp',
     ),
     'db' => array(
-        'name' => 'live',
-        'user' => 'hind',
-        'pass' => 'h8',
+        'name' => 'furm',
+        'user' => 'admin2gilenl',
+        'pass' => 'QyrRHNaqVakx',
         'host' => 'localhost',
     ),
-    'version' => '2.3',
+    'version' => '2.4',
     'enviroment' => 'DEVELOPMENT', // 'PRODUCTION'
 );
-
-if (is_file('/etc/furm.conf.php')) {
-    return include '/etc/furm.conf.php';
-}
 return $conf;
