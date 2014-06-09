@@ -6,9 +6,12 @@
  * @license BSD
  * @version $Id$
  */
+namespace furm;
+use yiff;
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-cache");
 header("Expires: -1");
+
 yiff\view\layout::getInstance()->disable(true);
 use yiff\cache\cache;
 class apiController extends \yiff\application\controller

@@ -14,4 +14,11 @@ $conf = array(
     'version' => '2.4',
     'enviroment' => 'DEVELOPMENT', // 'PRODUCTION'
 );
+
+   $conf['db'] = array(
+        'name' => 'live',
+        'user' => 'hind',
+        'pass' => 'h8',
+        'host' => 'localhost',
+       );
 return $conf;

@@ -1,5 +1,7 @@
 <?php
 
+//use home;
+
 /**
  * @yiff-db-table:users
  * @yiff-db-model:model_users
@@ -48,6 +50,16 @@ class model_users_entity extends yiff_db_model_abstract_entity
     public function __toString()
     {
         return $this->name;
+    }
+    
+    public function isMyFriend($uid)
+    {
+        if(home\model\friends::model()->fetchRow([
+            'user_id = ?'=>$uid,
+            'friend_id = ?'=>$this->id,
+        ])) {
+            return true;
+        }
     }
 
 }

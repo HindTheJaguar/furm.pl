@@ -139,7 +139,7 @@ class bootstrap extends yiff\application\bootstrap {
         ]));
 
         $route->addPath('default', new \yiff\router\http\standard([
-            'modules' => ['home', 'adm', 'rest', 'meets','furm'],
+            'modules' => ['home', 'adm', 'rest', 'meets','furm', 'grupy'],
         ]));
         \yiff\router\frontController::getInstance()->setRouteMap($route);
     }

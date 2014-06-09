@@ -25,12 +25,12 @@ class factory
     {
         if (!isset(self::$tMap[$table])) {
             $reflection = new \ReflectionClass($table);
-            $conf=[];
+            $conf = [];
             $classHead = $reflection->getDocComment();
             if (!preg_match('/@yiff-db-table:(.*)/', $classHead, $o)) {
                 throw new modelException('Brak info o tabeli');
             }
-                $conf['table'] = $o[1];
+            $conf['table'] = $o[1];
             if (preg_match('/yiff-db-model:(.*)/', $classHead, $o)) {
                 $conf['model'] = $o[1];
             } else {

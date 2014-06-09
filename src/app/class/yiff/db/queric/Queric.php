@@ -14,8 +14,9 @@
 namespace yiff\db\queric;
 
 use Closure;
+use LogicException;
 
-class Queric
+class Queric implements \IteratorAggregate
 {
 
     const WHERE = 'where';
@@ -31,11 +32,35 @@ class Queric
         'bind' => '',
         'group'=>null
     );
+    /**
+     *
+     * @var \yiff\db\adapter
+     */
     protected $_db;
 
+    protected $_model;
     public function __construct($db)
     {
         $this->_db = $db;
+    }
+    
+    public function setModel($model)
+    {
+        $this->_model = $model;
+    }
+    
+    public function getIterator()
+    {
+        if ($this->_model) {
+            return $this->_model->fetchAll($this);
+        } else {
+            return $this->_db->fetchAll($this->buildSelect(), $this->getBind());
+        }
+    }
+    
+    public function delete()
+    {
+        return $this->_db->query($this->buildDelete(), $this->getBind())->affected();
     }
 
     public function from($table, $cols = null)
@@ -102,6 +127,8 @@ class Queric
             } else if ($cond === '<>' || $cond === 'not') {
                 $w.= $colon . ' is null';
             }
+        } elseif ($cond === '=') {
+            $w.=$colon.' = '.$value;
         } elseif ($cond === 'in') {
             $w.=$colon . ' IN (' . implode(',', $value) . ')';
         } elseif ($colon instanceof Closure) {
@@ -289,7 +316,7 @@ class Queric
     public function exists($on, $exists = true)
     {
         if (!$exists) {
-            $this->_parts['where'] . ' not';
+            $this->_parts['where'].= ' not';
         }
         if ($on instanceof Closure) {
             $w = clone $this;

@@ -29,7 +29,15 @@
                 </div>
             </center>
             <br>
-            <a href="<?=port('/home/pw/new/user/'.$this->user->id);?>">Wyślij wiadomość</a>
+            <a class="btn btn-furm" href="<?=port('/home/pw/new/user/'.$this->user->id);?>">Wyślij wiadomość</a> 
+            <?php if (uid()) {
+                if ($this->user->isMyFriend(uid())) {
+                    echo '<a href="'.port('/home/friends/remove/'.$this->user->id).'" class="btn btn-default">Usuń ze znajomych</a>';
+                } else {
+                    echo '<a href="'.port('/home/friends/add/'.$this->user->id).'" class="btn btn-success btn">Dodaj ze znajomych</a>';
+                }
+            }
+            ?>
         </td>
         <td style="width:50%" align="center" valign="top">
             <table class="users_tbl">

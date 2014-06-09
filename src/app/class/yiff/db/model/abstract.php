@@ -240,7 +240,7 @@ class yiff_db_model_abstract implements ArrayAccess
             $oredr = '';
         }
 
-        $q = 'SELECT * FROM ' . $this->_name . ' ' . (($where) ? 'WHERE ' . $where : '') . $order . $limit;
+        $q = 'SELECT * FROM ' . $this->_name . ' as basetable ' . (($where) ? 'WHERE ' . $where : '') . $order . $limit;
         
         $ret = $this->_db->fetchAll($q);
         return new yiff\db\model\rowsetAbstract([
@@ -289,6 +289,7 @@ class yiff_db_model_abstract implements ArrayAccess
     public function select()
     {
         $select = $this->_db->queric();
+        $select->setModel($this);
         $select->from(array('basetable' => $this->_name));
         return $select;
     }

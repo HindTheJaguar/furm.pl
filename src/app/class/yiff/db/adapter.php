@@ -48,6 +48,13 @@ class adapter
         return $this->_queryCnt;
     }
 
+    /**
+     * 
+     * @param type $sql
+     * @param array $bind
+     * @return \yiff\db\stmt
+     * @throws \yiff\db\exception
+     */
     public function query($sql, array $bind = null)
     {
         $this->_queryCnt++;
